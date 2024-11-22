@@ -1,5 +1,7 @@
+
+
 function getBusinessProfilePageTemplate(currentUser, currentOrders, currentOffers, currentReviews) {
-	return `
+    return `
                     <section id="business" class="business_section section_group d_flex_cs_gxl ">
 
 
@@ -66,17 +68,17 @@ function getBusinessProfilePageTemplate(currentUser, currentOrders, currentOffer
             ${getOfferDialogWrapperTemplate()}
 
         </section>
-    `;
+    `
 }
 
 function getBusinessOfferTemplateList(currentOffers) {
-	if (!Array.isArray(currentOffers)) {
-		return `
+    if (!Array.isArray(currentOffers)) {
+        return `
             <div class="d_flex_cc_gm f_d_r_resp_c">
                 <h2 class="font_prime_color">Keine Angebote verfügbar</h2>
             </div>`;
-	}
-	let offerListHTML = `
+    }
+    let offerListHTML = `
         <div class="d_flex_cc_gm f_d_r_resp_c">
             <h2 class="font_prime_color">Meine Angebote</h2>
             <button onclick="openOfferDialog()" class="std_btn btn_prime pad_s d_flex_cc_gm">Angebot hinzufügen 
@@ -84,33 +86,33 @@ function getBusinessOfferTemplateList(currentOffers) {
             </button>
         </div>`;
 
-	currentOffers.forEach((offer) => {
-		user = getUserInfo(offer.user);
-		offerListHTML += getBusinessOfferTemplate(offer, user);
-	});
+    currentOffers.forEach(offer => {
+        user = getUserInfo(offer.user)
+        offerListHTML += getBusinessOfferTemplate(offer, user)
+    });
 
-	return offerListHTML;
+    return offerListHTML;
 }
 
 function getBusinessOrderTemplateList() {
-	let orderListHTML = ``;
+    let orderListHTML = ``;
 
-	currentOrders.forEach((order) => {
-		orderListHTML += getBusinessOrderTemplate(order);
-	});
+    currentOrders.forEach(order => {
+        orderListHTML += getBusinessOrderTemplate(order)
+    });
 
-	return orderListHTML;
+    return orderListHTML;
 }
 
 function getBusinessOrderTemplate(order) {
-	if (!order || typeof order !== 'object' || !order.id) {
-		return `
-        <li class="order_item_box d_flex_cc_gm w_full f_d_c">
-        <p>Ungültige Bestellung.</p>
-        </li>`;
-	}
-	customer_user = getUserInfo(order.customer_user);
-	return `
+    if (!order || typeof order !== 'object' || !order.id) {
+        return `
+            <li class="order_item_box d_flex_cc_gm w_full f_d_c">
+                <p>Ungültige Bestellung.</p>
+            </li>`;
+    }
+    customer_user = getUserInfo(order.customer_user)
+    return `
                         <li class="order_item_box d_flex_cc_gm w_full f_d_c">
                             <button open=false class="std_btn btn_prime pad_s order_btn_close d_flex_cc_gm"
                                 onclick="toggleOpen(this)">
@@ -146,39 +148,41 @@ function getBusinessOrderTemplate(order) {
                                     ${getOrderFeatureListTemplate(order.features)}
                                     </ul>
                                 </div>
+                                <hr>
                             </div>
+                            
                         </li>
-    `;
+    `
 }
 
-function getOrderFeatureListTemplate(features) {
-	if (!Array.isArray(features) || features.length === 0) {
-		return `<li>Keine Features verfügbar.</li>`;
-	}
-
-	let featureList = '';
-
-	features.forEach((feature) => {
-		featureList += `<li>${feature}</li>`;
-	});
-	return featureList;
+function getOrderFeatureListTemplate(features){
+    if (!Array.isArray(features) || features.length === 0) {
+        return `<li>Keine Features verfügbar.</li>`;
+    }
+    
+    let featureList = "";
+    
+    features.forEach(feature => {
+        featureList += `<li>${feature}</li>`
+    });
+    return featureList
 }
 
-function getOrderRevisionTemplate(revisions) {
-	if (revisions == 0) {
-		return 'Unbegrenzte';
-	} else if (revisions == 1) {
-		return revisions;
-	} else {
-		return revisions;
-	}
+function getOrderRevisionTemplate(revisions){
+    if(revisions == 0){
+        return 'Unbegrenzte'
+    } else if(revisions == 1) {
+        return revisions
+    } else {
+        return revisions
+    }
 }
 
 function getBusinessProfileTemplate(currentUser) {
-	if (!currentUser) {
-		return `<div>Profilinformationen sind nicht verfügbar.</div>`;
-	}
-	return `      
+    if (!currentUser) {
+        return `<div>Profilinformationen sind nicht verfügbar.</div>`;
+    }
+    return `      
                     <button onclick="openDialog('business_dialog')"
                         class="d_flex_cc_gl btn_round_l btn_edit abs_pos_edit_btn">
                         <img src="./assets/icons/edit.svg" alt="">
@@ -221,32 +225,32 @@ function getBusinessProfileTemplate(currentUser) {
                             </p>
                         </div>
                     </div>
-    `;
+    `
 }
 
 // Dialogs
 
 function getBusinessDialogTemplate() {
-	return `
+    return `
         <section id="business_dialog"
                 class="dialog d_flex_cc_gl pad_m d_none">
                 ${getBusinessDialogFormTemplate()}
             </section>
-    `;
+    `
 }
 
 function getBusinessDialogFormTemplate() {
-	if (!currentUser) {
-		return `<div>Es ist ein Fehler aufgetreten</div>`;
-	}
-	return `<div onclick="stopProp(event)" class="m_auto dialog_content small_form d_flex_cc_gl f_d_c">
+    if (!currentUser) {
+        return `<div>Es ist ein Fehler aufgetreten</div>`;
+    }
+    return `<div onclick="stopProp(event)" class="m_auto dialog_content small_form d_flex_cc_gl f_d_c">
 
                     <form onsubmit="businessEditOnsubmit(event)" class="d_flex_cc_gm f_d_c w_full pos_rel">
                         <button type="button" onclick="abboardBusinessEdit()"
                             class="d_flex_cc_gl btn_round_l btn_edit abs_pos_edit_btn_m">
                             <img src="./assets/icons/close_black.svg" alt="">
                         </button>
-                        <h2 class="font_prime_color">Profil editieren</h2>
+                        <h2 class="font_prime_color p_top_s">Profil editieren</h2>
                         <div class="image_input_box">
                             <img id="business_profile_img_input_output" class="profile_img_l" src="${getPersonImgPath(currentUser.file)}" alt="Aktuelles Profilbild">
                             <div onclick="clickFileInput('business_profile_img_input')"
@@ -302,5 +306,5 @@ function getBusinessDialogFormTemplate() {
                         </div>
                     </form>
                 </div>
-    `;
+    `
 }
